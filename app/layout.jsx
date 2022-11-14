@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body>
+        {/*mantine*/}
         <RootStyleRegistry>
           <RootNavigation />
           {children}
