@@ -1,35 +1,41 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { TextInput } from '@mantine/core'
+import { Autocomplete, Button, TextInput } from '@mantine/core'
+import { useState } from 'react';
+
+const autoCompleteDataZipCodes = ['93049', '93048', '93047', '93055', '95339', '93054']
+const autoCompleteDataCities = ['Regensburg (Innenstadt)', 'Regensburg', 'Regensburg (Landkreis)', 'Neuenmarkt']
+const autoCompleteDataBoth = [...autoCompleteDataZipCodes, ...autoCompleteDataCities]
+
 
 export default function SearchBar() {
-    return (
-        <div className="border-4 border-black p-4">
-            {/* 4 Items next to each other */}
-            <div className="flex flex-row flex-nowrap gap-x-8 justify-center">
-                <TextInput
-                    placeholder="Ort/PLZ"
-                    label="Geben Sie einen Ort oder eine Postleitzahl ein"
-                    withAsterisk
-                />
-                <div className="bg-blue-200">Combobox Mieten/Kaufen</div>
-                <div className="bg-green-200">Combobox Wohnung / Haus</div>
-                <a
-                href="#"
-                className="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
-              >
-                Suchen
-                {/* <span className="text-indigo-200" aria-hidden="true">
-                  &rarr;
-                </span> */}
-                <MagnifyingGlassIcon className="h-5 w-5 text-indigo-200 inline ml-2" aria-hidden="true" />
-              </a>
-            
-            </div>
+  const [searchFieldValue, setSearchFieldValue] = useState('');
 
-        </div>
-    )
+  const autoCompleteData = searchFieldValue.trim().length >= 2  ? autoCompleteDataBoth : [];
+
+  return (
+    <div className="p-4 border-4 border-black">
+      {/* 4 Items next to each other */}
+      <div className="flex flex-row justify-center flex-nowrap gap-x-8">
+        <Autocomplete
+          value={searchFieldValue}
+          onChange={setSearchFieldValue}
+          label="Your favorite framework/library"
+          placeholder="Pick one"
+          data={autoCompleteData}
+        />
+        <div className="bg-blue-200">Combobox Mieten/Kaufen</div>
+        <div className="bg-green-200">Combobox Wohnung / Haus</div>
+
+        <Button leftIcon={<MagnifyingGlassIcon className="inline w-5 h-5 ml-2 text-indigo-200" aria-hidden="true" />}>
+          Suchen
+        </Button>
+      </div>
+
+
+    </div>
+  )
 }
 
 
