@@ -1,4 +1,5 @@
 import Filter from "./filter";
+import SuchergebnisseMietenListe from "./suchergebnisse";
 
 
 export default function SuchergebnisseMieten (){
@@ -6,7 +7,7 @@ export default function SuchergebnisseMieten (){
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <Filter />
          
-            <div>Liste Suchergebnisse</div>
+            <SuchergebnisseMietenListe />
             <div>Bonus: Pagination</div>
         </div>
     )

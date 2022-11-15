@@ -1,7 +1,6 @@
 "use client";
 import { IconSnowflake, IconFlame, IconChevronDown, IconTent, IconTower } from '@tabler/icons';
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Autocomplete, Button, Chip, Group, Popover, RangeSlider, Select, Switch, TextInput, useMantineTheme } from "@mantine/core";
+import {  Button, Chip, Group, Popover, RangeSlider, Select, Switch,  useMantineTheme } from "@mantine/core";
 import { useState } from 'react';
 
 const marks = [
