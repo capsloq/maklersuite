@@ -36,7 +36,7 @@ export default function Filter() {
     }
 
     return (
-        <div className="py-24 border-4 border-black">
+        <div className="py-24">
             {/* 4 Items next to each other */}
             <div className="grid flex-row justify-center grid-cols-4 flex-nowrap gap-x-8">
                 {/* Wohnung oder Haus? */}

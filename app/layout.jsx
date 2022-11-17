@@ -16,18 +16,18 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body className=''>
-        {/*mantine*/}
-        <RootStyleRegistry>
-          <div class="flex flex-col h-screen">
-            <div>
-              <RootNavigation />
-            </div>
-            <div className="relative flex-grow">
-              {children}
-            </div>
-            <footer className="w-full h-24 bg-blue-400">hallo ich bin der footer</footer>
+        <div class="flex flex-col h-screen">
+          <div>
+            <RootNavigation />
           </div>
-        </RootStyleRegistry>
+          <div className="relative flex-grow">
+        {/*mantine*/}
+            <RootStyleRegistry>
+              {children}
+            </RootStyleRegistry>
+          </div>
+          <footer className="w-full h-24 bg-blue-400">hallo ich bin der footer</footer>
+        </div>
       </body>
     </html>
   )

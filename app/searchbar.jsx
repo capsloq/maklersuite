@@ -42,7 +42,7 @@ export default function SearchBar() {
           ]}
         />
 
-        <Button leftIcon={<MagnifyingGlassIcon className="inline w-5 h-5 ml-2 text-indigo-200" aria-hidden="true" />}>
+        <Button variant='subtle' color='dark' leftIcon={<MagnifyingGlassIcon className="inline w-5 h-5 ml-2 text-indigo-200" aria-hidden="true" />}>
           Suchen
         </Button>
       </div>
