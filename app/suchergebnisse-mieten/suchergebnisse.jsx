@@ -3,6 +3,7 @@
 import { Carousel } from "@mantine/carousel";
 import { Badge, Button, Card, Group, Text, Image } from "@mantine/core";
 import { IconBuildingWarehouse, IconMapPin } from "@tabler/icons";
+import Link from 'next/link';
 // import Image from "next/image";
 
 export default function SuchergebnisseMietenListe() {
@@ -17,6 +18,8 @@ export default function SuchergebnisseMietenListe() {
 
 function ImmoCard() {
     return (
+
+        
         <Card shadow="sm" p="lg" radius="md" withBorder>
              
         {/* <Card.Section>
@@ -27,18 +30,22 @@ function ImmoCard() {
             />
         </Card.Section> */}
 
+
+                      
+
             <Card.Section>
                 <Carousel slideSize="100%" height={350} align="start" slideGap="xs" controlsOffset="xl">
-                    <Carousel.Slide> <Image width={700} height={467} src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80" /></Carousel.Slide>
-                    <Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1602595688238-9fffe12d5af3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80" /></Carousel.Slide>
-                    <Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" /></Carousel.Slide>
-                    <Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1551105378-78e609e1d468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80" /></Carousel.Slide>
+                <Link href="suchergebnisEinzeldarstellung"><Carousel.Slide> <Image width={700} height={467} src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80" /></Carousel.Slide></Link>
+                <Link href="suchergebnisEinzeldarstellung"><Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1602595688238-9fffe12d5af3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80" /></Carousel.Slide></Link>
+                <Link href="suchergebnisEinzeldarstellung"><Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1537726235470-8504e3beef77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" /></Carousel.Slide></Link>
+                <Link href="suchergebnisEinzeldarstellung"><Carousel.Slide> <Image width={720} height={500} src="https://images.unsplash.com/photo-1551105378-78e609e1d468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80" /></Carousel.Slide></Link>
                     
                 </Carousel>
             </Card.Section>
+            
 
 
-
+            <Link href="suchergebnisEinzeldarstellung">
         <div className="space-y-4">
             <div></div>
 
@@ -68,6 +75,7 @@ function ImmoCard() {
             Book classic tour now
         </Button> */}
         </div>
+        </Link>
     </Card>
     )
 }
