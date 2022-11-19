@@ -31,6 +31,8 @@ function ImmoCard({ immobilie }) {
         return ('keine immobilie gefunden')
     }
 
+
+    const {id: immobilienId} = immobilie;
     const { ueberschrift, strasse, hausnummer, plz, ort, kaltmiete, warmmiete, flaeche, zimmer } = immobilie.attributes
     // Makler rausspilitten
     const { vorname: maklerVorname, nachname: maklerNachname } = immobilie.attributes.makler.data.attributes
@@ -56,7 +58,7 @@ function ImmoCard({ immobilie }) {
             <Card.Section>
                 <Carousel slideSize="100%" height={750} align="start" slideGap="xs" controlsOffset="xl">
                     {bilder.map((bild) => (
-                        <Link href="suchergebnisEinzeldarstellung" key={bild.hash}>
+                        <Link href={`immobilie/${immobilienId}`} key={bild.hash}>
                             <Carousel.Slide>
                                 <Image width={bild.width} height={bild.height} src={`${process.env.NEXT_PUBLIC_API_URL}${bild.url}`} />
                             </Carousel.Slide>

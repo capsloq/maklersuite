@@ -4,7 +4,7 @@ import Map from "./map";
 
 
 
-// Backend Calls (Daten Holen für Immobilie pramas.slug / id)
+// Backend Calls (Daten Holen für die Immobilie, die der User angeklickt hat. Die ID ist in pramas.slug
 
 
 export default function Immobilie({ params, searchParams }) {
