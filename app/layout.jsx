@@ -15,18 +15,18 @@ export default function RootLayout({ children }) {
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className='h-screen flex flex-col bg-gray-50'>
+      <body className='flex flex-col h-screen bg-gray-50'>
         <div>
           <RootNavigation />
         </div>
 
-        <div className="flex-grow mx-auto max-w-7xl w-full px-4 sm:px-6 relative">
+        <div className="relative flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6">
           {/*mantine*/}
           <RootStyleRegistry>
             {children}
           </RootStyleRegistry>
         </div>
-        <div className=''>
+        <div className='mt-32'>
           <footer className="w-full h-24 bg-blue-400">hallo ich bin der footer</footer>
         </div>
 

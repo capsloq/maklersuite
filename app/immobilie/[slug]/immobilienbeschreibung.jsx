@@ -1,24 +1,26 @@
+
 import { IconMapPin } from "@tabler/icons";
 
 export default function ImmobilienBeschreibung() {
     return (
-        
-        <div className="space-y-2 ">
+
+        <div className="space-y-6 ">
             <h1 className="font-bold">Exklusive Wohnung</h1>
-            <p className="font-bold">Adresse</p>
-            <div className="flex flex-row gap-x-2">
-                <IconMapPin size={30} />
-                <div>
-                    <p className="font-light">Johanna-Dachs-Straße 36, Ostenviertel</p>
-                    <p className="font-light">93055 Regensburg</p>
+            <div className="space-y-2">
+                <p className="font-bold">Adresse</p>
+                <div className="flex flex-row gap-x-2">
+
+                    <IconMapPin size={30} />
+
+                    <div>
+                        <p className="font-light">Johanna-Dachs-Straße 36, Ostenviertel</p>
+                        <p className="font-light">93055 Regensburg</p>
+                    </div>
                 </div>
             </div>
 
             {/* Preis,Fläche und so */}
             {/* Grid mit 4 Spalten */}
-
-
-           
 
             <div className="grid grid-cols-4 border-t-2 border-b-2 border-gray-400 align ">
                 <p className="text-2xl font-bold text-center">1.065 €</p>

@@ -12,13 +12,11 @@ export default function Immobilie({ params, searchParams }) {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <p>hallo, {params.slug} </p>
 
-            <div className="space-y-8">
+            <div className="space-y-10">
                 <Einzeldarstellung />
                 <ImmobilienBeschreibung />
-
-                <Map />
-
             </div>
+                <Map />
         </div>
     )
 }
