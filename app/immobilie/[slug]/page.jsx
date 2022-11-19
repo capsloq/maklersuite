@@ -1,4 +1,6 @@
 import Einzeldarstellung from "./einzeldarstellung";
+import ImmobilienBeschreibung from "./immobilienbeschreibung";
+import Map from "./map";
 
 
 
@@ -8,9 +10,15 @@ import Einzeldarstellung from "./einzeldarstellung";
 export default function Immobilie({ params, searchParams }) {
     return (
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            
-        <Einzeldarstellung />
-        <p>hallo, {params.slug} </p>
+            <p>hallo, {params.slug} </p>
+
+            <div className="space-y-8">
+                <Einzeldarstellung />
+                <ImmobilienBeschreibung />
+
+                <Map />
+
+            </div>
         </div>
     )
 }
