@@ -6,17 +6,29 @@ import { IconBuildingWarehouse, IconMapPin } from "@tabler/icons";
 import Link from 'next/link';
 // import Image from "next/image";
 
-export default function SuchergebnisseMietenListe() {
+export default function SuchergebnisseMietenListe({immobilienListe}) {
 
+    if (!immobilienListe || immobilienListe?.length < 1) {
+        return ('keine immobilien gefunden')
+    }
+        
 
     return (
         <div className='grid grid-cols-3 gap-4'>
-            {Array(12).fill(0).map((_, index) => (<ImmoCard key={index} />))}
+                
+            {immobilienListe.data.map((immobilie) => (<ImmoCard key={immobilie.id} immobilie={immobilie} />))}
         </div>
     )
 }
 
-function ImmoCard() {
+function ImmoCard({immobilie}) {
+    
+    if (!immobilie) {
+        return ('keine immobilie gefunden')
+    }
+
+    const {ueberschrift, strasse, hausnummer, plz, ort, kaltmiete, warmmiete, flaeche, zimmer} = immobilie.attributes
+
     return (
 
 
@@ -50,7 +62,7 @@ function ImmoCard() {
                     <div></div>
 
                     <div className="flex justify-between">
-                        <p className="mr-4 font-semibold truncate">Frisch renovierte Zweiraumwohnung mit Blick aufs Meer</p>
+                        <p className="mr-4 font-semibold truncate">{ueberschrift}</p>
                         <div>
                             <Badge color="green" variant="light" >
                                 Neu
