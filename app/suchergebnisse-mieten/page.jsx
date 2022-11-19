@@ -4,7 +4,7 @@ import SuchergebnisseMietenListe from "./suchergebnisse";
 
 
 async function getImmobilien() {
-    const res = await fetch('http://127.0.0.1:1337/api/immobilen');
+    const res = await fetch('http://127.0.0.1:1337/api/immobilen?populate=*');
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
 
