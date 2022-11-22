@@ -1,7 +1,8 @@
 'use client';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+
 import { Autocomplete, Button, Select, TextInput } from '@mantine/core'
+import { IconSearch } from '@tabler/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -21,21 +22,23 @@ export default function SearchBar() {
 
 
   return (
-    <div className="p-4 border-4 border-gray-900">
+    <div className="p-4 ">
     
       {/* 4 Items next to each other */}
-      <div className="grid flex-row justify-center grid-cols-5 flex-nowrap gap-x-8">
+      <div className="flex flex-col gap-4 lg:grid lg:justify-center lg:grid-cols-5">
         <div className="col-span-2">
         <Autocomplete
           value={searchFieldValue}
           onChange={setSearchFieldValue}
-          
+          autoFocus
           placeholder="Wo? Stadt oder PLZ"
           data={autoCompleteData}
+          size="md"
         />
         </div>
         <Select          
           defaultValue="mieten"
+          size="md"
           data={[
             { value: 'mieten', label: 'Mieten' },
             { value: 'kaufen', label: 'Kaufen' },           
@@ -43,6 +46,7 @@ export default function SearchBar() {
         />
          <Select          
           defaultValue="wohnung"
+          size="md"
           data={[
             { value: 'wohnung', label: 'Wohnung' },
             { value: 'haus', label: 'Haus' },           
@@ -55,7 +59,9 @@ export default function SearchBar() {
         
  
         >
-          Suchen
+          <div className='flex justify-end'>
+          <Button color="blue" variant="filled"  rightIcon={<IconSearch />} size="md" > Suchen </Button>
+          </div>
         </Link>
 
 

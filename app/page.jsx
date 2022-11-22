@@ -29,14 +29,14 @@ export default async function Home() {
         />
       </div>
       <div className="px-6 lg:px-8">
-      <div className="absolute inset-0 flex justify-center pt-32">
+      <div className="absolute inset-0 flex justify-center top-1/4">
         {/* Suche */}
-        <div className="max-w-4xl">
+        <div className="max-w-4xl space-y-8">
        
-        <div className="p-12 bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
-            <h1 className="pb-10 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-center sm:text-3xl">
-              Such dir deine neue Wohnung
+            <h1 className="text-2xl tracking-tight text-gray-800 sm:text-center sm:text-4xl">
+              Neue <span className='font-extrabold'>Wohnung?</span> Jetzt suchen!
             </h1>
+        <div className="p-6 bg-gray-100 bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
 
             <SearchBar />
           

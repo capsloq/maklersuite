@@ -1,5 +1,3 @@
-
-
 import './globals.css'
 import RootNavigation from './rootnavigation'
 import RootStyleRegistry from './emotion';
@@ -15,22 +13,27 @@ export default function RootLayout({ children }) {
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className='flex flex-col h-screen bg-gray-50'>
-        <div>
-          <RootNavigation />
+      <body>
+        {/* Div für Nav + Body = 100 vh */}
+        <div className='flex flex-col h-screen bg-gray-50'>
+          <div>
+            <RootNavigation />
+          </div>
+
+          <div className="relative flex-grow w-full px-4 mx-auto sm:px-6">
+            {/*mantine*/}
+            <RootStyleRegistry>
+              {children}
+            </RootStyleRegistry>
+          </div>
         </div>
 
-        <div className="relative flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6">
-          {/*mantine*/}
-          <RootStyleRegistry>
-            {children}
-          </RootStyleRegistry>
-        </div>
-        <div className='mt-32'>
-          <footer className="w-full h-24 bg-blue-400">hallo ich bin der footer</footer>
-        </div>
+        <footer className="flex items-center justify-center w-full h-24 mt-32 bg-blue-400 border-2">hallo ich bin der footer</footer>
+
 
       </body>
+
+
     </html>
   )
 }
