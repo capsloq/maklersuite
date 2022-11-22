@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import useSWR from 'swr'
 
+
+// TODO aus der Datenbank holen
 const autoCompleteDataZipCodes = ['93049', '93048', '93047', '93055', '95339', '93054']
 const autoCompleteDataCities = ['Regensburg (Innenstadt)', 'Regensburg', 'Regensburg (Landkreis)', 'Neuenmarkt']
 const autoCompleteDataBoth = [...autoCompleteDataZipCodes, ...autoCompleteDataCities]
