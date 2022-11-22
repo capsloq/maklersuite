@@ -6,6 +6,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
+import { IconHomeUp } from '@tabler/icons'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -42,7 +43,8 @@ export default function RootNavigation() {
                   </div>
                   <div className="flex items-center flex-shrink-0">
                     <Link href='/'>
-                    <img
+                      <IconHomeUp size='36' className='text-indigo-600'   />
+                    {/* <img
                       className="block w-auto h-8 lg:hidden"
                       src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
                       alt="Your Company"
@@ -51,7 +53,7 @@ export default function RootNavigation() {
                       className="hidden w-auto h-8 lg:block"
                       src="https://tailwindui.com/img/logos/mark.svg?color=red&shade=600"
                       alt="Your Company"
-                    />
+                    /> */}
                     </Link>
                   </div>
                   <div className="hidden md:ml-6 md:flex md:space-x-8">
