@@ -4,6 +4,8 @@ import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import { createStyles, Paper, Text, Title, Button, useMantineTheme, Rating } from '@mantine/core';
 
+
+
 const useStyles = createStyles((theme) => ({
   card: {
     height: 440,
@@ -33,7 +35,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-function Card({ image, title, category }) {
+function Card({ image, category }) {
     const { classes } = useStyles();
   
     return (
@@ -48,9 +50,7 @@ function Card({ image, title, category }) {
           <Text className={classes.category} size="xs">
             {category}
           </Text>
-          <Title order={3} className={classes.title}>
-            {title}
-          </Title>
+
         </div>
         {/* <Button variant="white" color="dark">
           Read article
@@ -102,18 +102,44 @@ function Card({ image, title, category }) {
 
 
 
-export default function Einzeldarstellung() {
+export default function Einzeldarstellung({immobilie}) {
+    
     const theme = useMantineTheme();
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-    const slides = data.map((item) => (
-        <Carousel.Slide key={item.title}>
-            <Card {...item} />
+   
+    // hier kommen die Bilder ins Karussell
+    const slides = immobilie.data.attributes.bilder.data.map(({id, attributes}) => (
+  
+        <Carousel.Slide key={id}>
+            <Card category={attributes.caption} image={"http://localhost:1337"+attributes.formats.medium.url} />
         </Carousel.Slide>
     ));
 
+    // const slides = data.map((item) => (
+
+    //     <Carousel.Slide key={item.image}>
+    //         <Card category={item.category} image={item.image} title={item.title} />
+    //     </Carousel.Slide>
+    // ));
+
+    // <>
+    // <div>id: {id}</div>
+    // <div>attributes: {JSON.stringify(attributes,null,2)}</div>
+    // </>
+
+    if (!immobilie) {
+      return ('keine immobilie gefunden')
+  }
+
+
+  const {id: immobilienId} = immobilie;
+  // Makler rausspilitten
+  const { vorname: maklerVorname, nachname: maklerNachname, sterne:sterne } = immobilie.data.attributes.makler.data.attributes
+
+
     return (
 
-        <div className="grid grid-cols-3 gap-x-6 pt-24">
+        <div className="grid grid-cols-3 pt-24 gap-x-6">
             <div className="w-full col-span-2 bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg ">
                 {/* karusell */}
                 <Carousel
@@ -136,37 +162,37 @@ export default function Einzeldarstellung() {
                     <h2 className="sr-only" id="profile-overview-title">
                       Profile Overview
                     </h2>
-                    <div className="bg-white p-6 flex-grow rounded-2xl">
+                    <div className="flex-grow p-6 bg-white rounded-2xl">
                       <div className="flex flex-col items-center justify-between">
                         <div className="flex flex-col space-x-5">
                           <div className="flex-shrink-0">
-                            <img className="mx-auto h-20 w-20 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                            <img className="w-20 h-20 mx-auto rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                           </div>
-                          <div className="mt-4 text-center  pt-1 ">
+                          <div className="pt-1 mt-4 text-center ">
                             <p className="text-sm font-medium text-gray-600">Immobilien Markler</p>
-                            <p className="text-xl font-bold text-gray-900">Jenz & Henzen Immo GmbH</p>
+                            <p className="text-xl font-bold text-gray-900">{maklerVorname} {maklerNachname}</p>
                             <p className="text-sm font-medium text-gray-600">82093 München</p>
                           </div>
                         </div>
-                        <div className="mt-5 flex justify-center">
+                        <div className="flex justify-center mt-5">
                           <a
                             href="#"
-                            className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
                           >
                             View profile
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 divide-y divide-gray-200 border-t border-gray-200 bg-white  rounded-b-2xl">
+                    <div className="grid grid-cols-1 bg-white border-t border-gray-200 divide-y divide-gray-200 rounded-b-2xl">
                      
-                        <div  className="px-6 py-5 text-center text-sm font-medium">
+                        <div  className="px-6 py-5 text-sm font-medium text-center">
                             <div className='flex justify-center'>
-                          <Rating defaultValue={4} />
+                          <Rating defaultValue={sterne} />
                           </div>
-                          <span className="text-gray-600 text-xs">212 Bewertungen</span>
+                          <span className="text-xs text-gray-600">212 Bewertungen</span>
                         </div>
-                        <div  className="px-6 py-5 text-center text-sm font-medium">
+                        <div  className="px-6 py-5 text-sm font-medium text-center">
                           <Button color='green'> Nachricht schreiben</Button>
                           {/* <span className="text-gray-600">Sterne</span> */}
                         </div>

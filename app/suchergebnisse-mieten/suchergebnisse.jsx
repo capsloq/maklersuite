@@ -14,11 +14,12 @@ export default function SuchergebnisseMietenListe({ immobilienListe }) {
 
 
     return (
-        <div className='grid grid-cols-2 gap-4'>
+        <div className='grid justify-center grid-cols-2 gap-4'>
 
             {immobilienListe.data.map((immobilie) => (
-
-                <ImmoCard key={immobilie.id} immobilie={immobilie} />
+                <div key={immobilie.id} className="max-w-md">
+                <ImmoCard  immobilie={immobilie} />
+                </div>
 
             ))}
         </div>
@@ -56,7 +57,7 @@ function ImmoCard({ immobilie }) {
 
 
             <Card.Section>
-                <Carousel slideSize="100%" height={750} align="start" slideGap="xs" controlsOffset="xl">
+                <Carousel slideSize="100%" height={500} align="start" slideGap="xs" controlsOffset="xl">
                     {bilder.map((bild) => (
                         <Link href={`immobilie/${immobilienId}`} key={bild.hash}>
                             <Carousel.Slide>
