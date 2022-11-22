@@ -14,10 +14,10 @@ export default function SuchergebnisseMietenListe({ immobilienListe }) {
 
 
     return (
-        <div className='grid justify-center grid-cols-2 gap-4'>
+        <div className='gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 justify-items-center'>
 
             {immobilienListe.data.map((immobilie) => (
-                <div key={immobilie.id} className="max-w-md">
+                <div key={immobilie.id} className="max-w-[333px]">
                 <ImmoCard  immobilie={immobilie} />
                 </div>
 
@@ -38,7 +38,7 @@ function ImmoCard({ immobilie }) {
     // Makler rausspilitten
     const { vorname: maklerVorname, nachname: maklerNachname } = immobilie.attributes.makler.data.attributes
     // Bilder holen
-    const bilder = immobilie.attributes.bilder.data.map((bild) => bild.attributes.formats.large)
+    const bilder = immobilie.attributes.bilder.data.map((bild) => bild.attributes.formats.small)
 
     return (
 
@@ -57,11 +57,18 @@ function ImmoCard({ immobilie }) {
 
 
             <Card.Section>
-                <Carousel slideSize="100%" height={500} align="start" slideGap="xs" controlsOffset="xl">
+                <Carousel slideSize="100%" height={400} si align="start" slideGap="xs" controlsOffset="xl">
                     {bilder.map((bild) => (
                         <Link href={`immobilie/${immobilienId}`} key={bild.hash}>
                             <Carousel.Slide>
-                                <Image width={bild.width} height={bild.height} src={`${process.env.NEXT_PUBLIC_API_URL}${bild.url}`} />
+                                <div className="-mt-10">
+                                <Image 
+                                    width={bild.width}
+                                    height={bild.height}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL}${bild.url}`}
+                                    // fit="contain"
+                                />
+                                </div>
                             </Carousel.Slide>
                         </Link>
                     ))}

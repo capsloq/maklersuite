@@ -1,22 +1,32 @@
 "use client"
 
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
+  const activeLinkClasses = "border-b-2 border-indigo-500 text-gray-900"
+  const inactiveLinkClasses = "border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+
 export default function RootNavigation() {
+
+  const currentPath = usePathname();
+  // Get the current route
+
+
 
     return (
         <Disclosure as="nav" className="bg-white shadow">
+        
         {({ open }) => (
           <>
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">            
               <div className="flex justify-between h-16">
                 <div className="flex">
                   <div className="flex items-center mr-2 -ml-2 md:hidden">
@@ -31,40 +41,50 @@ export default function RootNavigation() {
                     </Disclosure.Button>
                   </div>
                   <div className="flex items-center flex-shrink-0">
+                    <Link href='/'>
                     <img
                       className="block w-auto h-8 lg:hidden"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
                       alt="Your Company"
                     />
                     <img
                       className="hidden w-auto h-8 lg:block"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=red&shade=600"
                       alt="Your Company"
                     />
+                    </Link>
                   </div>
                   <div className="hidden md:ml-6 md:flex md:space-x-8">
-                    {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+                    <Link
+                      href='/'
+                      className={classNames(currentPath === "/" ? activeLinkClasses : inactiveLinkClasses,
+                       'inline-flex items-center px-1 pt-1 text-sm font-medium')}
+                    >
+                      Startseite
+                    </Link>
+
                     <Link
                       href="suchergebnisse-mieten"
-                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-indigo-500"
+                      className={classNames(currentPath === "/suchergebnisse-mieten" ? activeLinkClasses : inactiveLinkClasses,
+                      'inline-flex items-center px-1 pt-1 text-sm font-medium')}
                     >
                       Suchen
                     </Link>
                     <a
                       href="#"
-                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium"
                     >
                       Verkaufen
                     </a>
                     <a
                       href="#"
-                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium"
                     >
                       Vermieten
                     </a>
                     <a
                       href="immobilie"
-                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium"
                     >
                       Immobilie
                     </a>
@@ -77,7 +97,7 @@ export default function RootNavigation() {
                       className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <PlusIcon className="w-5 h-5 mr-2 -ml-1" aria-hidden="true" />
-                      <span>Anzeige schalten</span>
+                      <span>Inserat schalten</span>
                     </button>
                   </div>
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
