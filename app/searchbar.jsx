@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Autocomplete, Button, Select, TextInput } from '@mantine/core'
 import Link from 'next/link';
 import { useState } from 'react';
-import useSWR from 'swr'
+
 
 
 // TODO aus der Datenbank holen
