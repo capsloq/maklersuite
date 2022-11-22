@@ -3,8 +3,23 @@ import SuchergebnisseMietenListe from "./suchergebnisse";
 
 
 
-async function getImmobilien() {
-    const res = await fetch('http://127.0.0.1:1337/api/immobilen?populate=*');
+async function getSearchResults(searchParams) {
+    console.log("🚀 ~ file: page.jsx ~ line 7 ~ getSearchResults ~ search", searchParams)
+    const plzOderOrt = searchParams.search
+
+    //capitalize
+    const plzOderOrtCapitalized = plzOderOrt.charAt(0).toUpperCase() + plzOderOrt.slice(1)
+    console.log("🚀 ~ file: page.jsx ~ line 12 ~ getSearchResults ~ plzOderOrtCapitalized", plzOderOrtCapitalized)
+
+   
+
+    // if no id, throw error
+    if (!plzOderOrt) {
+        throw new Error('No PLZ oder Ort  provided');
+    }
+    const res = await fetch(`http://127.0.0.1:1337/api/immobilen?populate=*&filters[$or][0][plz][$eq]=${plzOderOrtCapitalized}&filters[$or][1][ort][$eq]=${plzOderOrtCapitalized}`);
+
+
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
 
@@ -19,8 +34,10 @@ async function getImmobilien() {
 
 
 
-export default async function SuchergebnisseMieten() {
-    const immobilienListe = await getImmobilien();
+export default async function SuchergebnisseMieten({ params, searchParams }) {
+  
+    const immobilienListe = await getSearchResults(searchParams);
+   
   
     return (
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

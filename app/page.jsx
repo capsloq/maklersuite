@@ -1,8 +1,15 @@
 import Image from 'next/image'
 import SearchBar from './searchbar'
-import catImage from './cat.jpg'
 
-export default function Home() {
+
+
+
+
+export default async function Home() {
+  // const searchResults = await getSearchResults('93055');
+
+
+  // console.log("🚀 ~ file: page.jsx ~ line 29 ~ Home ~ searchResults", JSON.stringify(searchResults,null,2))
   return (
     <main className=''>
       <div className='absolute inset-0 '>
@@ -10,13 +17,13 @@ export default function Home() {
         {/* <Image 
         src={catImage}
         alt="Picture of a cat"    
-        className='h-full w-full object-cover'
+        className='object-cover w-full h-full'
      
 
         /> */}
 
         <img
-          className="h-full w-full object-cover"
+          className="object-cover w-full h-full"
           src="/cat.jpg"
           alt="People working on laptops"
         />
@@ -27,11 +34,14 @@ export default function Home() {
         <div className="max-w-4xl">
        
         <div className="p-12 bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
-            <h1 className="text-2xl pb-10 font-extrabold tracking-tight text-gray-900 sm:text-center sm:text-3xl">
+            <h1 className="pb-10 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-center sm:text-3xl">
               Such dir deine neue Wohnung
             </h1>
 
             <SearchBar />
+          
+
+        
 
           </div>
        

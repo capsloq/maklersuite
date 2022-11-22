@@ -25,7 +25,7 @@ export default function Filter() {
     const [zimmerRangeValue, setZimmerRangeValue] = useState([20, 80]);
 
 
-    console.log("🚀 ~ file: filter.jsx ~ line 19 ~ Filter ~ mietpreisRangeValue", mietpreisRangeValue)
+
 
     function mietPreisRangeSliderFormat(value) {
         return `${value.toLocaleString()}€`;
