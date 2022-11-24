@@ -28,7 +28,7 @@ async function getAutocompleteSuggestions() {
 export default async function Home() {
   // const searchResults = await getSearchResults('93055');
   const autoCompleteData = await getAutocompleteSuggestions();
-  console.log("🚀 ~ file: page.jsx ~ line 31 ~ Home ~ autoCompleteData", JSON.stringify(autoCompleteData,null,2))
+  
 
 
   // console.log("🚀 ~ file: page.jsx ~ line 29 ~ Home ~ searchResults", JSON.stringify(searchResults,null,2))
