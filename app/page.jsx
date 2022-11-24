@@ -2,11 +2,33 @@ import Image from 'next/image'
 import SearchBar from './searchbar'
 
 
+async function getAutocompleteSuggestions() {
+
+
+
+  const res = await fetch(
+      `http://127.0.0.1:1337/api/immobilen?fields[0]=ort&fields[1]=plz`,
+      { next: { revalidate: 60 } }
+
+  )
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
 
 
 
 export default async function Home() {
   // const searchResults = await getSearchResults('93055');
+  const autoCompleteData = await getAutocompleteSuggestions();
+  console.log("🚀 ~ file: page.jsx ~ line 31 ~ Home ~ autoCompleteData", JSON.stringify(autoCompleteData,null,2))
 
 
   // console.log("🚀 ~ file: page.jsx ~ line 29 ~ Home ~ searchResults", JSON.stringify(searchResults,null,2))
@@ -38,7 +60,7 @@ export default async function Home() {
             </h1>
         <div className="p-6 bg-gray-100 bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
 
-            <SearchBar />
+            <SearchBar autoCompleteData={autoCompleteData} />
           
 
         
