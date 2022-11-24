@@ -94,13 +94,16 @@ export default function RootNavigation() {
                 </div>
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
+                  <Link href="inserat-schalten">
                     <button
                       type="button"
                       className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <PlusIcon className="w-5 h-5 mr-2 -ml-1" aria-hidden="true" />
                       <span>Inserat schalten</span>
+                    
                     </button>
+                    </Link>
                   </div>
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                     <button
