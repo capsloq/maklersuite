@@ -10,7 +10,8 @@ async function getImmobilie(id) {
     if (!id) {
         throw new Error('No Immobilien Id provided');
     }
-    const res = await fetch(`http://127.0.0.1:1337/api/immobilen/${id}?populate=*`);
+ 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen/${id}?populate=*`);
     
 
     // The return value is *not* serialized

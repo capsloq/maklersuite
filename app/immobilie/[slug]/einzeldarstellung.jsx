@@ -109,9 +109,9 @@ export default function Einzeldarstellung({immobilie}) {
    
     // hier kommen die Bilder ins Karussell
     const slides = immobilie.data.attributes.bilder.data.map(({id, attributes}) => (
-  
+      // <Card category={attributes.caption} image={`${process.env.NEXT_PUBLIC_API_URL}attributes.formats.medium.url`} />
         <Carousel.Slide key={id}>
-            <Card category={attributes.caption} image={"http://localhost:1337"+attributes.formats.medium.url} />
+            <Card category={attributes.caption} image={process.env.NEXT_PUBLIC_API_URL+attributes.formats.medium.url} />
         </Carousel.Slide>
     ));
 

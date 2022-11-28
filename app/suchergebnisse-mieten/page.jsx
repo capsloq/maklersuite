@@ -13,8 +13,9 @@ async function getSearchResults(searchParams) {
     }
 
     const res = await fetch(
-        `http://127.0.0.1:1337/api/immobilen?populate=*&filters[$or][0][plz][$eq]=${plzOderOrtCapitalized}&filters[$or][1][ort][$eq]=${plzOderOrtCapitalized}`
-        , { cache: 'no-store' }
+        
+        `${process.env.NEXT_PUBLIC_API_URL}/api/immobilen?populate=*&filters[$or][0][plz][$eq]=${plzOderOrtCapitalized}&filters[$or][1][ort][$eq]=${plzOderOrtCapitalized}`,
+  { cache: 'no-store' }
     )
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
