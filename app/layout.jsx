@@ -31,7 +31,6 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         {/* Div für Nav + Body = 100 vh */}
-        <Providers>
           <div className='flex flex-col min-h-screen bg-gray-50'>
             <div>
               <RootNavigation />
@@ -40,13 +39,14 @@ export default function RootLayout({ children }) {
             <div className="relative flex-grow w-full px-4 mx-auto sm:px-6">
               {/*mantine*/}
               <RootStyleRegistry>
+        <Providers>
                 {children}
+        </Providers>
               </RootStyleRegistry>
             </div>
           </div>
 
           <footer className="relative flex items-center justify-center w-full h-24 mt-32 bg-blue-400 border-2">hallo ich bin der footer</footer>
-        </Providers>
       </body>
 
 

@@ -1,4 +1,7 @@
+import { unstable_getServerSession } from 'next-auth';
 import Image from 'next/image'
+import { authOptions } from '../pages/api/auth/[...nextauth]';
+import LoginButton from './login-btn';
 import SearchBar from './searchbar'
 
 
@@ -27,6 +30,7 @@ async function getAutocompleteSuggestions() {
 
 export default async function Home() {
   // const searchResults = await getSearchResults('93055');
+  const session = await unstable_getServerSession(authOptions)
   const autoCompleteData = await getAutocompleteSuggestions();
   
 
@@ -34,6 +38,7 @@ export default async function Home() {
   // console.log("🚀 ~ file: page.jsx ~ line 29 ~ Home ~ searchResults", JSON.stringify(searchResults,null,2))
   return (
     <main className=''>
+      
       <div className='absolute inset-0 '>
 
         {/* <Image 
@@ -58,6 +63,9 @@ export default async function Home() {
             <h1 className="text-2xl tracking-tight text-gray-800 sm:text-center sm:text-4xl">
               Neue <span className='font-extrabold'>Wohnung?</span> Jetzt suchen!
             </h1>
+            <LoginButton />
+            {session ? <h1>geheimer inhalt</h1> : <h1>nur öffentlicher inhalt</h1>}
+            <h1>inhalt für sowohl asl auch</h1>
         <div className="p-6 bg-gray-100 bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
 
             <SearchBar autoCompleteData={autoCompleteData} />
