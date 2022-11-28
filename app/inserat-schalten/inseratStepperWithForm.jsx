@@ -1,8 +1,9 @@
 "use client"
 import { useState } from 'react';
-import { Stepper, Button, Group, TextInput, hausnummerInput, Code } from '@mantine/core';
+import { Stepper, Button, Group, TextInput, hausnummerInput, Code, NumberInput, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import StepOne from './step1';
+import StepTwo from './step2';
 
 export default function InsertStepperWithForm() {
     const [active, setActive] = useState(0);
@@ -35,7 +36,8 @@ export default function InsertStepperWithForm() {
 
             if (active === 1) {
                 return {
-                   
+                    ueberschrift: values.ueberschrift.trim().length < 1 ? 'Überschrift ist ein Pflichtfeld' : null,
+                    kaltmiete: values.kaltmiete.trim().length < 1 ? 'Kaltmiete ist ein Pflichtfeld' : null,
                 };
             }
 
@@ -53,37 +55,34 @@ export default function InsertStepperWithForm() {
 
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current))
 
-    console.log("form values: ", form.values);
+    const handleSubmit = (event) => {
+        console.log('SUBMITTED!, values: ',form.values);
+        // Create auf Strapi
+    }
 
     return (
         <>
-            <Stepper active={active} breakpoint="sm">
+            <Stepper active={active} breakpoint="sm" >
                 <Stepper.Step label="Objektadresse" description="Eingabe">
                     <StepOne form={form} />
                 </Stepper.Step>
 
                 <Stepper.Step label="Objektinfos" description="Eingabe">
-
-                    <TextInput label="ueberschrift" placeholder="ueberschrift" {...form.getInputProps('ueberschrift')} />
-                    <TextInput
                     
-                        mt="md"
-                        label="kaltmiete"
-                        placeholder="kaltmiete"
-                        {...form.getInputProps('kaltmiete')}
-                    />
+                    <StepTwo form={form} />
+                    
 
                 </Stepper.Step>
 
                 <Stepper.Step label="Bilder" description="Upload">
 
                 </Stepper.Step>
-                <Stepper.Completed>
+                {/* <Stepper.Completed>
                     Completed! Form values:
                     <Code block mt="xl">
                         {JSON.stringify(form.values, null, 2)}
                     </Code>
-                </Stepper.Completed>
+                </Stepper.Completed> */}
             </Stepper>
 
             <Group position="right" mt="xl">
@@ -92,8 +91,11 @@ export default function InsertStepperWithForm() {
                         Back
                     </Button>
                 )}
-                {active !== 3 && <Button onClick={nextStep}>Next step</Button>}
+                
+                {active === 2 ? <Button onClick={handleSubmit}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
+
             </Group>
+         
         </>
     );
 }
