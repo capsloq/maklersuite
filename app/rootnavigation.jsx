@@ -7,6 +7,7 @@ import { PlusIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import { IconHomeUp } from '@tabler/icons'
+import LoginButton from './login-btn'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -104,6 +105,7 @@ export default function RootNavigation() {
                     
                     </button>
                     </Link>
+                    <LoginButton />
                   </div>
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                     <button
