@@ -1,7 +1,4 @@
-import { unstable_getServerSession } from 'next-auth';
 import Image from 'next/image'
-import { authOptions } from '../pages/api/auth/[...nextauth]';
-import LoginButton from './login-btn';
 import SearchBar from './searchbar'
 
 
@@ -11,7 +8,7 @@ async function getAutocompleteSuggestions() {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/immobilen?fields[0]=ort&fields[1]=plz`,
-      { next: { revalidate: 60 } }
+    { next: { revalidate: 60 } }
 
   )
   // The return value is *not* serialized
@@ -19,8 +16,8 @@ async function getAutocompleteSuggestions() {
 
   // Recommendation: handle errors
   if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
   }
 
   return res.json();
@@ -30,25 +27,15 @@ async function getAutocompleteSuggestions() {
 
 export default async function Home() {
   // const searchResults = await getSearchResults('93055');
-  const session = await unstable_getServerSession(authOptions)
-  const autoCompleteData = await getAutocompleteSuggestions();
   
+  const autoCompleteData = await getAutocompleteSuggestions();
 
 
-  // console.log("🚀 ~ file: page.jsx ~ line 29 ~ Home ~ searchResults", JSON.stringify(searchResults,null,2))
+
+
   return (
     <main className=''>
-      
       <div className='absolute inset-0 '>
-
-        {/* <Image 
-        src={catImage}
-        alt="Picture of a cat"    
-        className='object-cover w-full h-full'
-     
-
-        /> */}
-
         <img
           className="object-cover w-full h-full"
           src="/cat.jpg"
@@ -56,28 +43,24 @@ export default async function Home() {
         />
       </div>
       <div className="px-6 lg:px-8">
-      <div className="absolute inset-0 flex justify-center top-1/4">
-        {/* Suche */}
-        <div className="max-w-4xl space-y-8">
-       
+        <div className="absolute inset-0 flex justify-center top-1/4">
+          {/* Suche */}
+          <div className="max-w-4xl space-y-8">
+
             <h1 className="text-2xl tracking-tight text-gray-800 sm:text-center sm:text-4xl">
               Neue <span className='font-extrabold'>Wohnung?</span> Jetzt suchen!
             </h1>
-            <LoginButton />
-            {session ? <h1>geheimer inhalt</h1> : <h1>nur öffentlicher inhalt</h1>}
-            <h1>inhalt für sowohl asl auch</h1>
-        <div className="p-6 bg-gray-100 bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
 
-            <SearchBar autoCompleteData={autoCompleteData} />
-          
+            <div className="p-6 bg-gray-100 bg-opacity-20 backdrop-blur-lg rounded-2xl drop-shadow-lg">
 
-        
+              <SearchBar autoCompleteData={autoCompleteData} />
+
+
+            </div>
 
           </div>
-       
         </div>
       </div>
-    </div>
-  </main>
+    </main>
   )
 }
