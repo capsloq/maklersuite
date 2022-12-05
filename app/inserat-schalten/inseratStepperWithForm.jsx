@@ -6,7 +6,7 @@ import StepOne from './step1';
 import StepTwo from './step2';
 import StepThree from './step3';
 
-export default function InsertStepperWithForm() {
+export default function InsertStepperWithForm({createImmobilie}) {
     const [active, setActive] = useState(2);
 
     const form = useForm({
@@ -58,6 +58,7 @@ export default function InsertStepperWithForm() {
 
     const handleSubmit = (event) => {
         console.log('SUBMITTED!, values: ',form.values);
+        
         // Create auf Strapi
     }
 
