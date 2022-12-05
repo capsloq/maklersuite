@@ -31,15 +31,14 @@ export default async function Home() {
   const autoCompleteData = await getAutocompleteSuggestions();
 
 
-
-
   return (
     <main className=''>
       <div className='absolute inset-0 '>
-        <img
+        <Image
           className="object-cover w-full h-full"
+          fill
           src="/cat.jpg"
-          alt="People working on laptops"
+          alt="le cat"
         />
       </div>
       <div className="px-6 lg:px-8">

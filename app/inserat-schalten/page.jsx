@@ -8,7 +8,28 @@ import InseratStepper from "./inseratStepper";
 import InsertStepperWithForm from "./inseratStepperWithForm";
 
 
+// Backend Calls (Daten Holen für die Immobilie, die der User angeklickt hat. Die ID ist in pramas.slug
+async function postImmobilie(immobile) {
+    // if no id, throw error
+    if (!immobile) {
+        throw new Error('No Immobilien Id provided');
+    }
+ 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen/${id}?populate=*`
+    , { method: 'POST', body: JSON.stringify({data:immobile}) });
+    
 
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+
+    // Recommendation: handle errors
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to create immobile');
+    }
+
+    return res.json();
+}
 
 export default async function InseratSchalten() {
 

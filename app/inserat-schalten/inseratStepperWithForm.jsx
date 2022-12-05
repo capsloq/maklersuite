@@ -4,9 +4,10 @@ import { Stepper, Button, Group, TextInput, hausnummerInput, Code, NumberInput, 
 import { useForm } from '@mantine/form';
 import StepOne from './step1';
 import StepTwo from './step2';
+import StepThree from './step3';
 
 export default function InsertStepperWithForm() {
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(2);
 
     const form = useForm({
         initialValues: {
@@ -75,7 +76,7 @@ export default function InsertStepperWithForm() {
                 </Stepper.Step>
 
                 <Stepper.Step label="Bilder" description="Upload">
-
+                    <StepThree form={form} />
                 </Stepper.Step>
                 {/* <Stepper.Completed>
                     Completed! Form values:
