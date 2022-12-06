@@ -47,8 +47,7 @@ export const authOptions = {
     callbacks: {
         //   jwt callback is only called when token is created
         async jwt(props) {           
-            const { account, token, user } = props        
-           
+            const { token, user } = props               
             // Persist the OAuth access_token to the token right after signin
             if (user) {               
                 token.user = user
@@ -57,7 +56,7 @@ export const authOptions = {
         },
         // session callback is called whenever a session for that particular user is checked
         async session(props) {          
-            const { session, token, user } = props
+            const { session, token } = props
             // in above function we created token.user=user
             session.user = token.user
             return session
