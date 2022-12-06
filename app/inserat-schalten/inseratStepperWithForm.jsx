@@ -10,11 +10,11 @@ import { useSession } from 'next-auth/react';
 
 
 
+
 export default function InsertStepperWithForm({jwtValue}) {
+ 
     const [active, setActive] = useState(0);
-    const router = useRouter();
-    const { data: session } = useSession()
-    
+    const router = useRouter();    
   
 
     const form = useForm({
@@ -84,7 +84,7 @@ export default function InsertStepperWithForm({jwtValue}) {
             headers: {
                 'Content-Type': 'application/json',
                 // Authorization
-                // 'Authorization': `Bearer ${jwtValue}`  // TODO: Github fragen wo JWT
+                'Authorization': `Bearer ${jwtValue}`  // TODO: Github fragen wo JWT
 
             },
             
@@ -92,8 +92,7 @@ export default function InsertStepperWithForm({jwtValue}) {
             body: JSON.stringify({
                 "data": form.values
             })
-        });
-        console.log("🚀 ~ file: inseratStepperWithForm.jsx:81 ~ postImmobilie ~ res", res)
+        });     
 
         // The return value is *not* serialized
         // You can return Date, Map, Set, etc.

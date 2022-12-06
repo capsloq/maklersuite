@@ -1,21 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { signIn } from '../../../app/services/auth';
-import GithubProvider from "next-auth/providers/github"
 
 
-
-// export const authOptions = {
-//     // Configure one or more authentication providers
-//     providers: [
-//       GithubProvider({
-//         clientId: "",
-//         clientSecret: "",
-//       }),
-//       // ...add more providers here
-//     ],
-//   }
-//   export default NextAuth(authOptions)
 
 
 export const authOptions = {
@@ -23,7 +10,7 @@ export const authOptions = {
     providers: [
         CredentialsProvider({
             name: 'Sign in with Email',
-            credentials: {
+            credentials: {                
                 email: { label: 'Email', type: 'text' },
                 password: { label: 'Password', type: 'password' },
             },
@@ -43,6 +30,8 @@ export const authOptions = {
                         email: credentials.email,
                         password: credentials.password,
                     });
+                    console.log("🚀 ~ file: [...nextauth].js:33 ~ authorize ~ user", user)
+               
                     return { ...user, jwt };
                 } catch (error) {
                     // Sign In Fail
@@ -51,17 +40,26 @@ export const authOptions = {
             },
         }),
     ],
+    session: {
+        strategy: "jwt",
+      },
+ 
     callbacks: {
-        async jwt({ token, account }) {
+        //   jwt callback is only called when token is created
+        async jwt(props) {           
+            const { account, token, user } = props        
+           
             // Persist the OAuth access_token to the token right after signin
-            if (account) {
-                token.accessToken = account.access_token
+            if (user) {               
+                token.user = user
             }
             return token
         },
-        async session({ session, token, user }) {
-            // Send properties to the client, like an access_token from a provider.
-            session.accessToken = token.accessToken
+        // session callback is called whenever a session for that particular user is checked
+        async session(props) {          
+            const { session, token, user } = props
+            // in above function we created token.user=user
+            session.user = token.user
             return session
         }
     }
