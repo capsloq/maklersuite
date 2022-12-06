@@ -5,19 +5,27 @@ import { useForm } from '@mantine/form';
 import StepOne from './step1';
 import StepTwo from './step2';
 import StepThree from './step3';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
-export default function InsertStepperWithForm({createImmobilie}) {
-    const [active, setActive] = useState(2);
+
+
+export default function InsertStepperWithForm({jwtValue}) {
+    const [active, setActive] = useState(0);
+    const router = useRouter();
+    const { data: session } = useSession()
+    
+  
 
     const form = useForm({
         initialValues: {
             strasse: '',
             hausnummer: '',
-            postleitzahl: '',
+            plz: '',
             ort: '',
             ueberschrift: '',
             kaltmiete: '',
-            wohnflaeche: '',
+            flaeche: '',
             zimmer: '',
             wohnungsytp: '',
             gesamtmiete: '',
@@ -30,7 +38,7 @@ export default function InsertStepperWithForm({createImmobilie}) {
                 return {
                     strasse: values.strasse.trim().length < 1 ? 'Strasse ist ein Pflichtfeld' : null,
                     hausnummer: values.hausnummer.trim().length< 1 ? 'Hausnummer ist ein Pflichtfeld' : null,
-                    postleitzahl: values.postleitzahl.trim().length !== 5 ? 'Postleitzahl muss genau fünf Zeichen lang sein.' : null,
+                    plz: values.plz.trim().length !== 5 ? 'Postleitzahl muss genau fünf Zeichen lang sein.' : null,
                     ort: values.ort.trim().length < 1 ? 'Ort ist ein Pflichtfeld' : null,
                 };
             }
@@ -56,10 +64,51 @@ export default function InsertStepperWithForm({createImmobilie}) {
 
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current))
 
-    const handleSubmit = (event) => {
-        console.log('SUBMITTED!, values: ',form.values);
+    // async function handleSubmit(refresh)  {
+    //     console.log('SUBMITTED!, values: ',form.values);
+    //     await fetch(``)
+       
+    //     // Create auf Strapi
+    // }
+
+    async function postImmobilie(refresh) {
+        const immobilie = form.values; // Alle Felder, die der User eingegeben hat
         
-        // Create auf Strapi
+        // if no id, throw error
+        if (!immobilie) {
+            throw new Error('Keine Felder für Immobilie');
+        }
+      
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization
+                // 'Authorization': `Bearer ${jwtValue}`  // TODO: Github fragen wo JWT
+
+            },
+            
+
+            body: JSON.stringify({
+                "data": form.values
+            })
+        });
+        console.log("🚀 ~ file: inseratStepperWithForm.jsx:81 ~ postImmobilie ~ res", res)
+
+        // The return value is *not* serialized
+        // You can return Date, Map, Set, etc.
+
+        // Recommendation: handle errors
+        if (!res.ok) {
+            // This will activate the closest `error.js` Error Boundary
+            console.error(res.status, res.statusText)
+            throw new Error('Failed to create immobile');
+        }
+
+
+        refresh()
+    
+        
     }
 
     return (
@@ -94,10 +143,17 @@ export default function InsertStepperWithForm({createImmobilie}) {
                     </Button>
                 )}
                 
-                {active === 2 ? <Button onClick={handleSubmit}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
+                {active === 2 ? <Button onClick={() => postImmobilie(router.refresh)}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
 
             </Group>
          
         </>
     );
 }
+
+function addieren(a, b) {
+    return a + b;
+}
+
+
+addieren(1,2) //3

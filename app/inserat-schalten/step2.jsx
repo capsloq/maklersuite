@@ -27,7 +27,7 @@ export default function StepTwo({ form }) {
                         placeholder="100 m²"
                         max={1500}
                         min={0}
-                        {...form.getInputProps('wohnflaeche')}
+                        {...form.getInputProps('flaeche')}
                     />
                     <NumberInput
                         label="Zimmer"
