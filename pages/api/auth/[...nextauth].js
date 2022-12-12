@@ -29,8 +29,7 @@ export const authOptions = {
                     const { user, jwt } = await signIn({
                         email: credentials.email,
                         password: credentials.password,
-                    });
-                    console.log("🚀 ~ file: [...nextauth].js:33 ~ authorize ~ user", user)
+                    });                    
                
                     return { ...user, jwt };
                 } catch (error) {
