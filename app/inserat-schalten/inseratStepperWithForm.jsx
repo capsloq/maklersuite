@@ -8,13 +8,17 @@ import StepThree from './step3';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+import axios from 'axios';
 
 
 
 export default function InsertStepperWithForm({jwtValue}) {
  
-    const [active, setActive] = useState(0);
-    const router = useRouter();    
+    const [active, setActive] = useState(2);
+    const router = useRouter();
+    
+    const [files, setFiles] = useState([]);
+   
   
 
     const form = useForm({
@@ -71,41 +75,115 @@ export default function InsertStepperWithForm({jwtValue}) {
     //     // Create auf Strapi
     // }
 
-    async function postImmobilie(refresh) {
+    async function postImmobilie(e,refresh) {
         const immobilie = form.values; // Alle Felder, die der User eingegeben hat
+       
+        e.preventDefault();
+        
         
         // if no id, throw error
         if (!immobilie) {
             throw new Error('Keine Felder für Immobilie');
         }
-      
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Authorization
-                'Authorization': `Bearer ${jwtValue}`  // TODO: Github fragen wo JWT
 
-            },
+        
+
+
+
+        const formData = new FormData();
+        const data = {...immobilie}
+        console.log("🚀 ~ file: inseratStepperWithForm.jsx:94 ~ postImmobilie ~ data", data)
+        formData.append("data", JSON.stringify(data))
+        console.log("files", files[0])
+        //multiple-files
+        const filesArrray = files.map((file) => {
+            formData.append(`files.bilder`, file)
             
-
-            body: JSON.stringify({
-                "data": form.values
-            })
-        });     
-
-        // The return value is *not* serialized
-        // You can return Date, Map, Set, etc.
-
-        // Recommendation: handle errors
-        if (!res.ok) {
-            // This will activate the closest `error.js` Error Boundary
-            console.error(res.status, res.statusText)
-            throw new Error('Failed to create immobile');
-        }
+        })
 
 
-        refresh()
+      
+
+
+
+        //update collection
+
+        // const updateArticle = await fetch(
+        //     "http://localhost:1337/api/immobilie",
+        //     {
+        //         method: "POST",
+        //         body: formData, 
+        //         headers: {  
+        //         "authorization": `Bearer ${jwtValue}`,
+        //         "content-type": "form-data",
+        //         }
+                
+               
+
+              
+        //     })
+        // use axios to post data
+        const res2 = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, formData, {
+            headers: {
+                // 'Content-Type': 'multipart/form-data; boundary="xxx"',
+                // 'Connection': 'keep-alive',
+                // 'Accept': '*/*',
+                'Authorization': `Bearer ${jwtValue}`
+            }
+        })
+
+        // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data; boundary="xxx"',
+        //         'Connection': 'keep-alive',
+        //         'Accept': '*/*',
+        //         'Authorization': `Bearer ${jwtValue}`
+        //     },
+        //     body: formData
+        // })
+
+        // const updateData = await updateArticle.json()
+
+
+    
+        // console.log("🚀 ~ file: inseratStepperWithForm.jsx:101 ~ postImmobilie ~ formData", formData)
+        
+
+
+        // formData.append("files.bilder", files[0]);
+        // // formData.append("refId", 1);
+        // // formData.append("ref", "api::immobilie.immobilie");
+        // // formData.append("field", "bilder");
+    
+  
+        
+        // // formData.append('data', JSON.stringify({data:form.values}))
+        
+        // console.log("🚀 ~ file: inseratStepperWithForm.jsx:99 ~ postImmobilie ~ formData", formData)
+      
+        // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${jwtValue}`
+        //     },
+        //     body: JSON.stringify(formData)
+        // })
+          
+
+        // // The return value is *not* serialized
+        // // You can return Date, Map, Set, etc.
+
+        // // Recommendation: handle errors
+        // if (!res.ok) {
+        //     // This will activate the closest `error.js` Error Boundary
+        //     console.error(res.status, res.statusText)
+        //     throw new Error('Failed to create immobile');
+        // }
+
+
+        // refresh()
     
         
     }
@@ -125,7 +203,7 @@ export default function InsertStepperWithForm({jwtValue}) {
                 </Stepper.Step>
 
                 <Stepper.Step label="Bilder" description="Upload">
-                    <StepThree form={form} />
+                    <StepThree form={form} files={files} setFiles={setFiles} />
                 </Stepper.Step>
                 {/* <Stepper.Completed>
                     Completed! Form values:
@@ -142,7 +220,7 @@ export default function InsertStepperWithForm({jwtValue}) {
                     </Button>
                 )}
                 
-                {active === 2 ? <Button onClick={() => postImmobilie(router.refresh)}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
+                {active === 2 ? <Button onClick={(e) => postImmobilie(e,router.refresh)}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
 
             </Group>
          
