@@ -124,13 +124,21 @@ export default function InsertStepperWithForm({jwtValue}) {
         //     })
         // use axios to post data
         const res2 = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, formData, {
-            headers: {
-                // 'Content-Type': 'multipart/form-data; boundary="xxx"',
-                // 'Connection': 'keep-alive',
-                // 'Accept': '*/*',
+            headers: {       
                 'Authorization': `Bearer ${jwtValue}`
             }
         })
+        // GET id from response
+        console.log("🚀 ~ file: inseratStepperWithForm.jsx:133 ~ postImmobilie ~ res2", res2)
+        const id = res2.data.data.id
+
+        // PUT 
+        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen/${id}`, formData, {
+            headers: {
+                'Authorization': `Bearer ${jwtValue}`
+            }
+        })
+
 
         // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen`, {
         //     method: 'POST',
