@@ -23,7 +23,7 @@ export default async function InseratSchalten() {
                 <div className="py-24">                    
                     {/* <AuthOnly /> */}
                     {/* <InseratStepper /> */}  
-                    <LoginButton />               
+                    {/* <LoginButton />                */}
                     <InsertStepperWithForm jwtValue={session.user.jwt}  />
                    
                 </div>

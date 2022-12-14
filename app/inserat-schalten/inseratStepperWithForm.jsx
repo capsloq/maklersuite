@@ -198,19 +198,19 @@ export default function InsertStepperWithForm({jwtValue}) {
 
     return (
         <>
-            <Stepper active={active} breakpoint="sm" >
-                <Stepper.Step label="Objektadresse" description="Eingabe">
+            <Stepper active={active} breakpoint="sm" color="yellow.5" >
+                <Stepper.Step color="yellow.5" label="Objektadresse" description="Eingabe">
                     <StepOne form={form} />
                 </Stepper.Step>
 
-                <Stepper.Step label="Objektinfos" description="Eingabe">
+                <Stepper.Step color="yellow.5" label="Objektinfos" description="Eingabe">
                     
                     <StepTwo form={form} />
                     
 
                 </Stepper.Step>
 
-                <Stepper.Step label="Bilder" description="Upload">
+                <Stepper.Step color="yellow.5" label="Bilder" description="Upload">
                     <StepThree form={form} files={files} setFiles={setFiles} />
                 </Stepper.Step>
                 {/* <Stepper.Completed>
@@ -228,7 +228,7 @@ export default function InsertStepperWithForm({jwtValue}) {
                     </Button>
                 )}
                 
-                {active === 2 ? <Button onClick={(e) => postImmobilie(e,router.refresh)}> Immobilie einpflegen </Button> : <Button onClick={nextStep}>Next step</Button>}
+                {active === 2 ? <Button color="purple" onClick={(e) => postImmobilie(e, router.refresh)}> Immobilie einpflegen </Button> : <Button color="purple" onClick={nextStep}>Next step</Button>}
 
             </Group>
          

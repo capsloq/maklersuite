@@ -67,8 +67,9 @@ export default function SearchBar({autoCompleteData}) {
         
  
         >
+            
           <div className='flex justify-end'>
-          <Button color="blue" variant="filled"  rightIcon={<IconSearch />} size="md" > Suchen </Button>
+          <Button color="purple" variant="filled"  rightIcon={<IconSearch />} size="md" > Suchen </Button>
           </div>
         </Link>
 

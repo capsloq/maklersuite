@@ -10,9 +10,9 @@ export default function LoginButton({ children }) {
   if (session) {
     return (
       <>
-        Signed in as {session.user.email} <br />
+        {/* Signed in as {session.user.email} <br />
         Ganze OBject: {JSON.stringify(session)} <br />
-        Access Token: {session.accessToken} <br />
+        Access Token: {session.accessToken} <br /> */}
         {/* <UserInformation data={session.user} /> */}
         <button onClick={() => signOut()}>Sign out</button>
         {children}

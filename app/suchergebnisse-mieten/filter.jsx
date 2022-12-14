@@ -51,7 +51,7 @@ export default function Filter() {
                 <div>
                     <Popover width='target' position="bottom" withArrow shadow="md" opened={isMietpreisPopoverOpen} onChange={setIsMietpreisPopoverOpen} >
                         <Popover.Target>
-                            <Button fullWidth rightIcon={<IconChevronDown size={16} />} onClick={() => setIsMietpreisPopoverOpen((prev) => !prev)} >Mietpreis</Button>
+                            <Button fullWidth color="gray.7" rightIcon={<IconChevronDown size={16} />} onClick={() => setIsMietpreisPopoverOpen((prev) => !prev)} >Mietpreis</Button>
                         </Popover.Target>
                         <Popover.Dropdown>
                             <div className='space-y-8'>
@@ -77,7 +77,7 @@ export default function Filter() {
                                         onChange={setMietpreisRangeValue}
 
                                         // labelAlwaysOn
-                                        color={isWarmMiete ? 'yellow.4' : 'blue.6'}
+                                        color={isWarmMiete ? 'yellow.5' : 'blue.6'}
                                         styles={{ thumb: { borderWidth: 2, padding: 3 } }}
                                         thumbSize={26}
                                         thumbChildren={[<IconTent size={16} key="1" />, <IconTower size={16} key="2" />]}
@@ -88,7 +88,7 @@ export default function Filter() {
                                 </div>
                                 <Button
                                     fullWidth
-                                    color='cyan'
+                                    color='purple'
                                     onClick={() => setIsMietpreisPopoverOpen(false)}
                                 >
                                     Filter anwenden
@@ -99,7 +99,7 @@ export default function Filter() {
                         </Popover.Dropdown>
                     </Popover>
                     <div className='flex justify-center mt-4'>
-                        <Chip checked={true}>
+                        <Chip color="purple" checked={true}>
                             {isWarmMiete ? "Warmmiete" : "Kaltmiete"}: {mietpreisRangeValue[0] * 20} - {mietpreisRangeValue[1] * 20}€
                         </Chip>
                     </div>
@@ -108,7 +108,7 @@ export default function Filter() {
                 <div>
                     <Popover width='target' position="bottom" withArrow shadow="md" opened={isWohnflaechePopoverOpen} onChange={setIsWohnflaechePopoverOpen} >
                         <Popover.Target>
-                            <Button fullWidth rightIcon={<IconChevronDown size={16} />} onClick={() => setIsWohnflaechePopoverOpen((prev) => !prev)} >Wohnfläche</Button>
+                            <Button fullWidth color="gray.7" rightIcon={<IconChevronDown size={16} />} onClick={() => setIsWohnflaechePopoverOpen((prev) => !prev)} >Wohnfläche</Button>
                         </Popover.Target>
                         <Popover.Dropdown>
                             <div className='mt-4 space-y-8'>
@@ -123,7 +123,7 @@ export default function Filter() {
                                         onChange={setWohnflaecheRangeValue}
 
                                         // labelAlwaysOn
-                                        color={isWarmMiete ? 'yellow.4' : 'blue.6'}
+                                        color={isWarmMiete ? 'yellow.5' : 'blue.6'}
                                         styles={{ thumb: { borderWidth: 2, padding: 3 } }}
                                         thumbSize={26}
                                         thumbChildren={[<IconTent size={16} key="1" />, <IconTower size={16} key="2" />]}
@@ -134,7 +134,7 @@ export default function Filter() {
                                 </div>
                                 <Button
                                     fullWidth
-                                    color='cyan'
+                                    color='purple'
                                     onClick={() => setIsWohnflaechePopoverOpen(false)}
                                 >
                                     Filter anwenden
@@ -145,7 +145,7 @@ export default function Filter() {
                         </Popover.Dropdown>
                     </Popover>
                     <div className='flex justify-center mt-4'>
-                        <Chip checked={true}>
+                        <Chip color="purple" checked={true}>
                             {"Wohnfläche"}: {wohnflaecheRangeValue[0] * 5} - {wohnflaecheRangeValue[1] * 5}qm
                         </Chip>
                     </div>
@@ -155,7 +155,7 @@ export default function Filter() {
                 <div>
                     <Popover width='target' position="bottom" withArrow shadow="md" opened={isZimmerPopoverOpen} onChange={setIsZimmerPopoverOpen} >
                         <Popover.Target>
-                            <Button fullWidth rightIcon={<IconChevronDown size={16} />} onClick={() => setIsZimmerPopoverOpen((prev) => !prev)} >Zimmer</Button>
+                            <Button fullWidth color="gray.7" rightIcon={<IconChevronDown size={16} />} onClick={() => setIsZimmerPopoverOpen((prev) => !prev)} >Zimmer</Button>
                         </Popover.Target>
                         <Popover.Dropdown>
                             <div className='mt-4 space-y-8'>
@@ -170,7 +170,7 @@ export default function Filter() {
                                         onChange={setZimmerRangeValue}
 
                                         // labelAlwaysOn
-                                        color={isWarmMiete ? 'yellow.4' : 'blue.6'}
+                                        color={isWarmMiete ? 'yellow.5' : 'blue.6'}
                                         styles={{ thumb: { borderWidth: 2, padding: 3 } }}
                                         thumbSize={26}
                                         thumbChildren={[<IconTent size={16} key="1" />, <IconTower size={16} key="2" />]}
@@ -181,7 +181,7 @@ export default function Filter() {
                                 </div>
                                 <Button
                                     fullWidth
-                                    color='cyan'
+                                    color='purple'
                                     onClick={() => setIsZimmerPopoverOpen(false)}
                                 >
                                     Filter anwenden
@@ -192,7 +192,7 @@ export default function Filter() {
                         </Popover.Dropdown>
                     </Popover>
                     <div className='flex justify-center mt-4'>
-                        <Chip checked={true}>
+                        <Chip color="purple" checked={true}>
                             {"Zimmer"}: {zimmerRangeValue[0] / 5} - {zimmerRangeValue[1] / 5}
                         </Chip>
                     </div>

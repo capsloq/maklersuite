@@ -41,7 +41,7 @@ export default async function SuchergebnisseMieten({ params, searchParams }) {
                 <Filter />
 
                 <SuchergebnisseMietenListe immobilienListe={immobilienListe} />
-                <div>Bonus: Pagination</div>
+                {/* <div>Bonus: Pagination</div> */}
             
             </div>
        
