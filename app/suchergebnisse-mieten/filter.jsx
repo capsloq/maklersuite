@@ -1,7 +1,9 @@
 "use client";
-import { IconSnowflake, IconFlame, IconChevronDown, IconTent, IconTower } from '@tabler/icons';
-import {  Button, Chip, Group, Popover, RangeSlider, Select, Switch,  useMantineTheme } from "@mantine/core";
+import { IconSnowflake, IconFlame, IconChevronDown, IconTent, IconTower, IconArrowBigRight, IconArrowNarrowRight } from '@tabler/icons';
+import { ActionIcon, Button, Chip, Group, Popover, RangeSlider, Select, Switch, useMantineTheme } from "@mantine/core";
 import { useState } from 'react';
+
+const qs = require('qs');
 
 const marks = [
     { value: 20, label: '200€' },
@@ -15,6 +17,7 @@ export default function Filter() {
     const [isWarmMiete, setIsWarmMiete] = useState(false);
     const [isMietpreisPopoverOpen, setIsMietpreisPopoverOpen] = useState(false);
     const [mietpreisRangeValue, setMietpreisRangeValue] = useState([20, 80]);
+
 
     // Wohnfläche
     const [isWohnflaechePopoverOpen, setIsWohnflaechePopoverOpen] = useState(false);
@@ -35,12 +38,75 @@ export default function Filter() {
         return `${value.toLocaleString()}qm`;
     }
 
+    async function handleFilterAnwenden() {
+        const mietpreisVon = mietpreisRangeValue[0] * 20
+        const mietPreisBis = mietpreisRangeValue[1] * 20
+        const wohnflaecheVon = wohnflaecheRangeValue[0] * 5
+        const wohnflaecheBis = wohnflaecheRangeValue[1] * 5
+        const zimmerVon = zimmerRangeValue[0] /5
+        const zimmerBis = zimmerRangeValue[1] /5
+        //Todo select wohnung/haus
+
+
+
+        const query = qs.stringify({
+            filters: {
+                $and: [
+                    {
+                        kaltmiete: {
+                            $gte: mietpreisVon,
+                        },
+                    },
+                    {
+                        warmmiete: {
+                            $lte: mietPreisBis,
+                        },
+                    },
+                    {
+                        flaeche: {
+                            $between: [wohnflaecheVon, wohnflaecheBis],
+                        }
+                    },
+                    {
+                        zimmer: {
+                            $between: [zimmerVon, zimmerBis],
+                        }
+
+                    }
+
+                ]
+            },
+        }, {
+            encodeValuesOnly: true, // prettify URL
+        });
+        console.log("🚀 ~ file: filter.jsx:82 ~ handleFilterAnwenden ~ query", query)
+
+
+        // await request(`${NEXT_PUBLIC_API_URL}/api/users?${query}`);
+
+        setIsMietpreisPopoverOpen(false)
+
+        // Für Serverseitige Filterung
+        /* Strapi hat built in Methoden wie , z.b localhost:1337/api/immobilies?filters[preis][$gte]=200&filters[preis][$lte]=800 */
+
+    }
+
+
     return (
-        <div className="py-24">
+        <div className="py-24 ">
             {/* 4 Items next to each other */}
-            <div className="grid flex-row justify-center grid-cols-4 flex-nowrap gap-x-8">
+            <div className="grid flex-row justify-center grid-cols-5 flex-nowrap gap-x-8 ">
                 {/* Wohnung oder Haus? */}
                 <Select
+                    styles={(theme) => ({
+                        input: {
+                            backgroundColor: theme.colors.gray[7],
+                            color: 'white',
+                            textAlign: 'center',
+                            fontWeight: 600,
+                        }
+                    })
+                    }
                     defaultValue="wohnung"
                     data={[
                         { value: 'wohnung', label: 'Wohnung' },
@@ -86,13 +152,7 @@ export default function Filter() {
                                         <span>von</span><span>bis</span>
                                     </div>
                                 </div>
-                                <Button
-                                    fullWidth
-                                    color='purple'
-                                    onClick={() => setIsMietpreisPopoverOpen(false)}
-                                >
-                                    Filter anwenden
-                                </Button>
+
                             </div>
 
 
@@ -132,13 +192,7 @@ export default function Filter() {
                                         <span>von</span><span>bis</span>
                                     </div>
                                 </div>
-                                <Button
-                                    fullWidth
-                                    color='purple'
-                                    onClick={() => setIsWohnflaechePopoverOpen(false)}
-                                >
-                                    Filter anwenden
-                                </Button>
+
                             </div>
 
 
@@ -179,13 +233,6 @@ export default function Filter() {
                                         <span>von</span><span>bis</span>
                                     </div>
                                 </div>
-                                <Button
-                                    fullWidth
-                                    color='purple'
-                                    onClick={() => setIsZimmerPopoverOpen(false)}
-                                >
-                                    Filter anwenden
-                                </Button>
                             </div>
 
 
@@ -199,10 +246,13 @@ export default function Filter() {
                 </div>
 
 
+                <ActionIcon size="lg" variant="filled" color="purple" radius="xl" onClick={handleFilterAnwenden} >            
+                    <IconArrowNarrowRight size="lg" color="white" />
+                </ActionIcon>
 
             </div>
-
-
         </div>
+
+
     )
 }
