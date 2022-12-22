@@ -4,9 +4,14 @@ import { Carousel } from "@mantine/carousel";
 import { Badge, Button, Card, Group, Text, Image } from "@mantine/core";
 import { IconBuildingWarehouse, IconMapPin } from "@tabler/icons";
 import Link from 'next/link';
+import React from "react";
+import Filter from "./filter";
 // import Image from "next/image";
 
-export default function SuchergebnisseMietenListe({ immobilienListe }) {
+export default function SuchergebnisseMietenListe({ immobilienListe:immobilienListeDefault }) {
+    
+    const [immobilienListe, setImmobilienListe] = React.useState(immobilienListeDefault);
+    
 
     if (!immobilienListe || immobilienListe?.length < 1) {
         return ('keine immobilien gefunden')
@@ -14,14 +19,15 @@ export default function SuchergebnisseMietenListe({ immobilienListe }) {
 
 
     return (
-        <div className='gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 justify-items-center'>
-
-            {immobilienListe.data.map((immobilie) => (
-                <div key={immobilie.id} className="max-w-[333px]">
-                <ImmoCard  immobilie={immobilie} />
-                </div>
-
-            ))}
+        <div>
+             <Filter setImmobilienListe={setImmobilienListe} />
+            <div className='gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 justify-items-center'>
+                {immobilienListe.data.map((immobilie) => (
+                    <div key={immobilie.id} className="max-w-[333px]">
+                    <ImmoCard  immobilie={immobilie} />
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

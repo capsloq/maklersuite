@@ -1,16 +1,10 @@
-import Filter from "./filter";
 import SuchergebnisseMietenListe from "./suchergebnisse";
 
 
 
-async function getSearchResults(searchParams) {
+async function getSearchResults(plzOderOrtCapitalized) {
 
-    const plzOderOrt = searchParams.search || ''
-    let plzOderOrtCapitalized = ''
 
-    if (plzOderOrt) {
-        plzOderOrtCapitalized = plzOderOrt.charAt(0).toUpperCase() + plzOderOrt.slice(1)
-    }
 
     const res = await fetch(
         
@@ -32,15 +26,21 @@ async function getSearchResults(searchParams) {
 
 
 export default async function SuchergebnisseMieten({ params, searchParams }) {
+    const plzOderOrt = searchParams.search || ''
+    let plzOderOrtCapitalized = ''
 
-    const immobilienListe = await getSearchResults(searchParams);
+    if (plzOderOrt) {
+        plzOderOrtCapitalized = plzOderOrt.charAt(0).toUpperCase() + plzOderOrt.slice(1)
+    }
+
+    const immobilienListe = await getSearchResults(plzOderOrtCapitalized);
 
     return (
        
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <Filter />
+               
 
-                <SuchergebnisseMietenListe immobilienListe={immobilienListe} />
+                <SuchergebnisseMietenListe immobilienListe={immobilienListe} searchParams={plzOderOrtCapitalized}/>
                 {/* <div>Bonus: Pagination</div> */}
             
             </div>

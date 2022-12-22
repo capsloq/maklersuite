@@ -33,8 +33,9 @@ export default async function InseratSchalten() {
         )
     }
 
-    return (<div>Sie müssen eingeloggt sein, um ein Inserat aufzugeben!
+    return (<div className="text-bold text-bg">Sie müssen eingeloggt sein, um ein Inserat aufzugeben!
         <LoginButton />
+
     </div>)
 
 

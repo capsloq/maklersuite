@@ -14,7 +14,10 @@ export default function LoginButton({ children }) {
         Ganze OBject: {JSON.stringify(session)} <br />
         Access Token: {session.accessToken} <br /> */}
         {/* <UserInformation data={session.user} /> */}
-        <button onClick={() => signOut()}>Sign out</button>
+        <button 
+        onClick={() => signOut()}>Sign out
+                    
+        </button>
         {children}
       </>
     );
@@ -22,7 +25,8 @@ export default function LoginButton({ children }) {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <button  className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-700 border border-transparent rounded-md shadow-sm hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2"
+      onClick={() => signIn()}>Sign in</button>
     </>
   );
 }

@@ -2,6 +2,8 @@
 import { IconSnowflake, IconFlame, IconChevronDown, IconTent, IconTower, IconArrowBigRight, IconArrowNarrowRight } from '@tabler/icons';
 import { ActionIcon, Button, Chip, Group, Popover, RangeSlider, Select, Switch, useMantineTheme } from "@mantine/core";
 import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const qs = require('qs');
 
@@ -11,8 +13,10 @@ const marks = [
     { value: 80, label: '800€' },
 ];
 
-export default function Filter() {
+export default function Filter({setImmobilienListe}) {
     const theme = useMantineTheme();
+    const router = useRouter();
+ 
     // Mietpreis
     const [isWarmMiete, setIsWarmMiete] = useState(false);
     const [isMietpreisPopoverOpen, setIsMietpreisPopoverOpen] = useState(false);
@@ -76,15 +80,28 @@ export default function Filter() {
 
                 ]
             },
+            populate: ['makler', 'bilder']
         }, {
             encodeValuesOnly: true, // prettify URL
         });
         console.log("🚀 ~ file: filter.jsx:82 ~ handleFilterAnwenden ~ query", query)
 
 
-        // await request(`${NEXT_PUBLIC_API_URL}/api/users?${query}`);
-
-        setIsMietpreisPopoverOpen(false)
+        // use axios in client component
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/immobilen?${query}`, {
+            // headers: {       
+                //     'Authorization': `Bearer ${jwtValue}`
+                // }
+            })
+            
+            console.log("🚀 ~ file: filter.jsx:92 ~ handleFilterAnwenden ~ response", response)
+        
+            if (response.status !== 200) {
+                throw new Error(response.statusText)
+            }
+            setImmobilienListe(response.data)
+            setIsMietpreisPopoverOpen(false)
+            router.refresh()
 
         // Für Serverseitige Filterung
         /* Strapi hat built in Methoden wie , z.b localhost:1337/api/immobilies?filters[preis][$gte]=200&filters[preis][$lte]=800 */
