@@ -24,9 +24,9 @@ export default function LoginButton({ children }) {
   }
   return (
     <>
-      Not signed in <br />
+      {/* Not signed in <br /> */}
       <button  className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-purple-700 border border-transparent rounded-md shadow-sm hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2"
-      onClick={() => signIn()}>Sign in</button>
+      onClick={() => signIn()}>Einloggen</button>
     </>
   );
 }
