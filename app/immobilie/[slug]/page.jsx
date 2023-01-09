@@ -32,8 +32,7 @@ export default async function Immobilie({ params, searchParams }) {
     
     return (
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <p>hallo, {params.slug} </p>
-
+           
             <div className="space-y-10">
                 <Einzeldarstellung immobilie={immobilie} />
                 <ImmobilienBeschreibung immobilie={immobilie}  />
