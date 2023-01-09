@@ -45,8 +45,8 @@ export default function RootNavigation() {
                   </div>
                   <div className="flex items-center flex-shrink-0">
                     <Link href='/'>
-                      <div className='relative h-[64px] overflow-hidden'>
-                      <LogoHausDicker className="w-auto h-20 -z-1"    />
+                      <div className='relative h-[48px] overflow-hidden'>
+                      <LogoHausDicker className="w-auto h-12 -z-1"    />
                       </div>
                     {/* <img
                       className="block w-auto h-8 lg:hidden"

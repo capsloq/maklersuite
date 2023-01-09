@@ -8,11 +8,11 @@ import { signIn } from '../../../app/services/auth';
 export const authOptions = {
     // Configure one or more authentication providers
     pages: {
-        // signIn: '/auth/signin',
+        signIn: '/auth/signin',
     },
     providers: [
         CredentialsProvider({
-            name: 'Sign in with Email',
+            name: "Credentials",
             credentials: {                
                 email: { label: 'Email', type: 'text' },
                 password: { label: 'Password', type: 'password' },
