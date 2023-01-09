@@ -24,7 +24,7 @@ export default async function CreateImmobilie({ immobilie }) {
 
 
     const response = await postImmobilie(immobilie);
-    console.log("🚀 ~ file: createImmobilie.jsx:27 ~ CreateImmobilie ~ response", response)
+    // console.log("🚀 ~ file: createImmobilie.jsx:27 ~ CreateImmobilie ~ response", response)
 
     return (<div>immobile wurde angelegt</div>)
 }

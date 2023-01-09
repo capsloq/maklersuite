@@ -84,7 +84,7 @@ export default function Filter({setImmobilienListe}) {
         }, {
             encodeValuesOnly: true, // prettify URL
         });
-        console.log("🚀 ~ file: filter.jsx:82 ~ handleFilterAnwenden ~ query", query)
+
 
 
         // use axios in client component
@@ -94,7 +94,7 @@ export default function Filter({setImmobilienListe}) {
                 // }
             })
             
-            console.log("🚀 ~ file: filter.jsx:92 ~ handleFilterAnwenden ~ response", response)
+           
         
             if (response.status !== 200) {
                 throw new Error(response.statusText)

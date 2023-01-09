@@ -22,7 +22,7 @@ import Footer from './footer';
 
 
 export default function RootLayout({ children, session }) {
-console.log("🚀 ~ file: layout.jsx:25 ~ RootLayout ~ session", session)
+
 
   return (
     <html lang="en" className="h-full">

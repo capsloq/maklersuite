@@ -92,9 +92,9 @@ export default function InsertStepperWithForm({jwtValue}) {
 
         const formData = new FormData();
         const data = {...immobilie}
-        console.log("🚀 ~ file: inseratStepperWithForm.jsx:94 ~ postImmobilie ~ data", data)
+       
         formData.append("data", JSON.stringify(data))
-        console.log("files", files[0])
+       
         //multiple-files
         const filesArrray = files.map((file) => {
             formData.append(`files.bilder`, file)
@@ -129,7 +129,7 @@ export default function InsertStepperWithForm({jwtValue}) {
             }
         })
         // GET id from response
-        console.log("🚀 ~ file: inseratStepperWithForm.jsx:133 ~ postImmobilie ~ res2", res2)
+    
         const id = res2.data.data.id
 
         // PUT 
